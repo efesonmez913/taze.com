@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  background-color: #fbf7ee;
+  color: #3b2a20;
+}
+
+* {
+  box-sizing: border-box;
+}

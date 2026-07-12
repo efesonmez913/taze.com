@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "PowerShell(npx tsc --noEmit 2>&1)",
+      "PowerShell($node = \\(Get-Command node -ErrorAction SilentlyContinue\\); if \\($node\\) { \"node: $\\($node.Source\\)\"; node --version } else { \"node not found\" }; Get-ChildItem \"$env:ProgramFiles\\\\nodejs\" -ErrorAction SilentlyContinue | Select-Object Name | Format-Table -AutoSize)",
+      "PowerShell($env:Path = \"$env:ProgramFiles\\\\nodejs;\" + $env:Path; node --version; npm --version)",
+      "PowerShell($env:Path = \"$env:ProgramFiles\\\\nodejs;\" + $env:Path; & \"$env:ProgramFiles\\\\nodejs\\\\node.exe\" \"node_modules\\\\typescript\\\\bin\\\\tsc\" --noEmit 2>&1 | Select-Object -First 60)",
+      "PowerShell(\"deleted\")",
+      "PowerShell($env:Path = \"$env:ProgramFiles\\\\nodejs;\" + $env:Path; & \"$env:ProgramFiles\\\\nodejs\\\\node.exe\" \"C:\\\\Users\\\\efeso\\\\OneDrive\\\\Desktop\\\\taze\\\\node_modules\\\\typescript\\\\bin\\\\tsc\" --noEmit --project \"C:\\\\Users\\\\efeso\\\\OneDrive\\\\Desktop\\\\taze\\\\tsconfig.json\" 2>&1 | Select-Object -First 40; \"EXIT: $LASTEXITCODE\")",
+      "PowerShell($env:Path = \"$env:ProgramFiles\\\\nodejs;\" + $env:Path; Set-Location \"C:\\\\Users\\\\efeso\\\\OneDrive\\\\Desktop\\\\taze\"; & \"$env:ProgramFiles\\\\nodejs\\\\npm.cmd\" run build 2>&1 | Select-Object -Last 45; \"EXIT: $LASTEXITCODE\")",
+      "PowerShell($env:Path = \"$env:ProgramFiles\\\\nodejs;\" + $env:Path; Set-Location \"C:\\\\Users\\\\efeso\\\\OneDrive\\\\Desktop\\\\taze\"; $p = Start-Process -FilePath \"$env:ProgramFiles\\\\nodejs\\\\node.exe\" -ArgumentList \"node_modules\\\\next\\\\dist\\\\bin\\\\next\",\"dev\",\"-p\",\"3999\" -PassThru -RedirectStandardOutput \"dev.log\" -RedirectStandardError \"dev.err\" -WindowStyle Hidden; Start-Sleep -Seconds 9; try { $r = Invoke-WebRequest \"http://localhost:3999/\" -UseBasicParsing -TimeoutSec 10; \"HOME: $\\($r.StatusCode\\)\"; $r2 = Invoke-WebRequest \"http://localhost:3999/uretici-kayit\" -UseBasicParsing -TimeoutSec 10; \"KAYIT: $\\($r2.StatusCode\\)\" } catch { \"REQ ERR: $_\" }; Stop-Process -Id $p.Id -Force; \"--- log ---\"; Get-Content dev.log -ErrorAction SilentlyContinue; Get-Content dev.err -ErrorAction SilentlyContinue; Remove-Item dev.log,dev.err -ErrorAction SilentlyContinue)",
+      "Skill(gstack)",
+      "Skill(gstack:*)",
+      "Bash(python3 -)",
+      "PowerShell(node --version; npm --version; \\(Get-Command code -ErrorAction SilentlyContinue\\).Source)",
+      "PowerShell($paths = @\\(\"C:\\\\Program Files\\\\nodejs\\\\node.exe\", \"C:\\\\Program Files \\(x86\\)\\\\nodejs\\\\node.exe\", \"$env:LOCALAPPDATA\\\\Programs\\\\nodejs\\\\node.exe\", \"$env:APPDATA\\\\nvm\", \"$env:LOCALAPPDATA\\\\nvs\", \"$env:USERPROFILE\\\\scoop\\\\apps\\\\nodejs\", \"$env:LOCALAPPDATA\\\\fnm_multishells\"\\); foreach \\($p in $paths\\) { if \\(Test-Path $p\\) { Write-Output \"FOUND: $p\" } }; Get-ChildItem \"$env:USERPROFILE\\\\anaconda3\\\\node.exe\",\"$env:USERPROFILE\\\\anaconda3\\\\Library\\\\bin\\\\node.exe\" -ErrorAction SilentlyContinue | ForEach-Object { Write-Output \"CONDA: $\\($_.FullName\\)\" })",
+      "PowerShell(Set-Location \"C:\\\\Users\\\\efeso\\\\OneDrive\\\\Desktop\\\\taze\\\\sahinogullari-website\"; & \"C:\\\\Program Files\\\\nodejs\\\\npm.cmd\" install --no-audit --no-fund 2>$null; Write-Output \"EXIT: $LASTEXITCODE\"; Test-Path \"node_modules\\\\.bin\\\\live-server.cmd\")",
+      "PowerShell($machinePath = [Environment]::GetEnvironmentVariable\\(\"Path\", \"Machine\"\\); $userPath = [Environment]::GetEnvironmentVariable\\(\"Path\", \"User\"\\); if \\(\\($machinePath + \";\" + $userPath\\) -match \"nodejs\"\\) { Write-Output \"npm PATH OK - kullanici terminalinde calisir\" } else { Write-Output \"nodejs PATH kaydinda yok\" })",
+      "PowerShell(& \"C:\\\\Users\\\\efeso\\\\AppData\\\\Local\\\\Programs\\\\Microsoft VS Code\\\\bin\\\\code.cmd\" \"C:\\\\Users\\\\efeso\\\\OneDrive\\\\Desktop\\\\taze\\\\sahinogullari-website\"; Write-Output \"VS Code acildi: $LASTEXITCODE\")",
+      "Bash(SCRATCH=\"/c/Users/efeso/AppData/Local/Temp/claude/C--Users-efeso-OneDrive-Desktop-taze/96b4f81d-c321-462d-a16d-929bdfa2ed5f/scratchpad/sahin\" *)",
+      "WebSearch",
+      "WebFetch(domain:dugun.com)",
+      "PowerShell(node --version)",
+      "PowerShell(npm --version)",
+      "Bash(curl -sL -A 'Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/126.0 Safari/537.36' https://dugun.com/dugun-salonlari/ankara/velora-wedding -o /c/Users/efeso/AppData/Local/Temp/claude/C--Users-efeso-OneDrive-Desktop-taze/c5ce6cb1-b8ff-4d29-a52f-c098c48758c5/scratchpad/velora.html)",
+      "Bash(SCRATCH=\"/c/Users/efeso/AppData/Local/Temp/claude/C--Users-efeso-OneDrive-Desktop-taze/c5ce6cb1-b8ff-4d29-a52f-c098c48758c5/scratchpad\" && grep -oE 'https://[^\"'\\\\''[:space:]]+\\\\.\\(jpg|jpeg|png|webp\\)[^\"'\\\\''[:space:]]*' \"$SCRATCH/velora.html\" | sort -u | head -60)",
+      "Bash(python -c ' *)",
+      "PowerShell(Set-Location \"C:\\\\Users\\\\efeso\\\\OneDrive\\\\Desktop\\\\taze\\\\velora-wedding\"; $env:Path = \"C:\\\\Program Files\\\\nodejs;$env:Path\"; npm run dev)",
+      "Bash(curl -s -o /dev/null -w \"index: %{http_code}\\\\n\" \"http://127.0.0.1:5173/\")",
+      "Bash(curl -s -o /dev/null -w \"foto: %{http_code}\\\\n\" \"http://127.0.0.1:5173/img/velora-01.jpg\")",
+      "Bash(curl -s -o /dev/null -w \"css: %{http_code}\\\\n\" \"http://127.0.0.1:5173/css/style.css\")",
+      "Bash(curl -s -o /dev/null -w \"site: %{http_code}\\\\n\" \"http://127.0.0.1:5173/\")",
+      "PowerShell(& \"C:\\\\Users\\\\efeso\\\\OneDrive\\\\Desktop\\\\velora-baslat.bat\")"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "sahinogullari-site",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8123", "--directory", "sahinogullari-website"],
+      "port": 8123
+    },
+    {
+      "name": "velora-site",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8124", "--directory", "velora-wedding"],
+      "port": 8124
+    }
+  ]
+}
