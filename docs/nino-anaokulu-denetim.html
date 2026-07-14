@@ -1,0 +1,536 @@
+<style>
+  :root{
+    --paper:#f3f1ea; --surface:#fbfaf5; --surface-2:#f7f5ee;
+    --ink:#161f1b; --muted:#586661; --faint:#8b938d;
+    --line:#e3dfd4; --line-strong:#d2ccbd;
+    --accent:#0e6e57; --accent-ink:#0a5343; --accent-soft:#e3efe9;
+    --amber:#a86a24; --amber-soft:#f3e8d6;
+    --crit:#b23a26; --crit-soft:#f2ddd6;
+    --warn:#a3701a; --warn-soft:#f2e8d1;
+    --ok:#2f8163; --ok-soft:#dcebe3;
+    --shadow:0 1px 2px rgba(20,30,25,.04),0 12px 30px -18px rgba(20,30,25,.22);
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --paper:#0e1411; --surface:#141c18; --surface-2:#18211c;
+      --ink:#e9ede7; --muted:#9caaa2; --faint:#6a766e;
+      --line:#25302a; --line-strong:#33413a;
+      --accent:#41c29b; --accent-ink:#63d0ad; --accent-soft:#122a20;
+      --amber:#d59d5a; --amber-soft:#271e12;
+      --crit:#e17a62; --crit-soft:#2b1813;
+      --warn:#d6a447; --warn-soft:#282111;
+      --ok:#54b98d; --ok-soft:#132a21;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 16px 34px -20px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="light"]{
+    --paper:#f3f1ea; --surface:#fbfaf5; --surface-2:#f7f5ee;
+    --ink:#161f1b; --muted:#586661; --faint:#8b938d;
+    --line:#e3dfd4; --line-strong:#d2ccbd;
+    --accent:#0e6e57; --accent-ink:#0a5343; --accent-soft:#e3efe9;
+    --amber:#a86a24; --amber-soft:#f3e8d6;
+    --crit:#b23a26; --crit-soft:#f2ddd6;
+    --warn:#a3701a; --warn-soft:#f2e8d1;
+    --ok:#2f8163; --ok-soft:#dcebe3;
+    --shadow:0 1px 2px rgba(20,30,25,.04),0 12px 30px -18px rgba(20,30,25,.22);
+  }
+  :root[data-theme="dark"]{
+    --paper:#0e1411; --surface:#141c18; --surface-2:#18211c;
+    --ink:#e9ede7; --muted:#9caaa2; --faint:#6a766e;
+    --line:#25302a; --line-strong:#33413a;
+    --accent:#41c29b; --accent-ink:#63d0ad; --accent-soft:#122a20;
+    --amber:#d59d5a; --amber-soft:#271e12;
+    --crit:#e17a62; --crit-soft:#2b1813;
+    --warn:#d6a447; --warn-soft:#282111;
+    --ok:#54b98d; --ok-soft:#132a21;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 16px 34px -20px rgba(0,0,0,.7);
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+    line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  .wrap{max-width:920px;margin:0 auto;padding:clamp(20px,5vw,64px) clamp(16px,4vw,40px) 80px}
+
+  /* ---- rhythm ---- */
+  section{margin-top:clamp(40px,6vw,68px)}
+  .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent-ink);font-weight:600}
+  h1,h2,h3{text-wrap:balance;margin:0}
+  .sec-head{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap;
+    padding-bottom:.7rem;border-bottom:1px solid var(--line);margin-bottom:1.4rem}
+  .sec-head h2{font-size:clamp(1.28rem,3vw,1.62rem);font-weight:680;letter-spacing:-.01em}
+  .sec-head .n{font-family:var(--mono);font-size:.8rem;color:var(--faint);font-weight:600}
+  .sec-head .aside{margin-left:auto;font-size:.82rem;color:var(--muted)}
+  p{margin:0 0 1rem}
+  .lead{color:var(--muted)}
+
+  /* ---- header ---- */
+  header.masthead{border-bottom:2px solid var(--ink);padding-bottom:1.6rem}
+  .kicker{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:1.5rem}
+  .badge{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--accent-ink);background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);
+    padding:.28rem .6rem;border-radius:999px;font-weight:600}
+  .kicker .date{font-family:var(--mono);font-size:.74rem;color:var(--faint);letter-spacing:.04em}
+  header.masthead h1{font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.08;letter-spacing:-.025em;font-weight:720}
+  header.masthead h1 .sub{display:block;color:var(--accent);font-size:clamp(1rem,3vw,1.4rem);
+    font-weight:600;letter-spacing:-.01em;margin-top:.5rem}
+  .thesis{margin-top:1.5rem;font-size:clamp(1.02rem,2.4vw,1.22rem);line-height:1.5;max-width:60ch;color:var(--ink)}
+  .thesis b{color:var(--accent-ink)}
+  .byline{margin-top:1.5rem;display:flex;gap:1.4rem;flex-wrap:wrap;font-size:.82rem;color:var(--muted);
+    font-family:var(--mono);letter-spacing:.02em}
+  .byline span{display:flex;flex-direction:column;gap:.15rem}
+  .byline .k{color:var(--faint);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase}
+
+  /* ---- scorecard ---- */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;
+    box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--sev,var(--accent))}
+  .card .metric{font-family:var(--mono);font-variant-numeric:tabular-nums;font-weight:670;
+    font-size:clamp(1.9rem,5vw,2.5rem);line-height:1;letter-spacing:-.02em;color:var(--ink)}
+  .card .metric small{font-size:.9rem;color:var(--muted);font-weight:500;letter-spacing:0}
+  .card .label{margin-top:.55rem;font-size:.83rem;color:var(--ink);font-weight:600;line-height:1.35}
+  .card .note{margin-top:.25rem;font-size:.76rem;color:var(--muted);line-height:1.4}
+  .card.crit{--sev:var(--crit)} .card.warn{--sev:var(--warn)} .card.ok{--sev:var(--ok)}
+
+  /* ---- findings ---- */
+  .find{display:flex;flex-direction:column;gap:12px}
+  .grp-label{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--faint);margin:1.5rem 0 .2rem;font-weight:600}
+  .grp-label:first-child{margin-top:0}
+  .row{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;
+    background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--sev,var(--line-strong));
+    border-radius:12px;padding:14px 16px}
+  .row.crit{--sev:var(--crit)} .row.warn{--sev:var(--warn)} .row.opp{--sev:var(--accent)}
+  .chip{font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;
+    padding:.3rem .5rem;border-radius:6px;white-space:nowrap;margin-top:.15rem}
+  .chip.crit{color:var(--crit);background:var(--crit-soft)}
+  .chip.warn{color:var(--warn);background:var(--warn-soft)}
+  .chip.opp{color:var(--accent-ink);background:var(--accent-soft)}
+  .row .body h3{font-size:.98rem;font-weight:660;letter-spacing:-.005em;margin-bottom:.2rem}
+  .row .body p{margin:0;font-size:.9rem;color:var(--muted);line-height:1.5}
+  .row .body .cost{color:var(--ink)}
+  .row .body .cost b{color:var(--sev,var(--ink))}
+  .row .data{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--sev)}
+
+  /* ---- review bar ---- */
+  .bars{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:var(--shadow)}
+  .bar-row{display:grid;grid-template-columns:130px 1fr auto;gap:14px;align-items:center;padding:9px 0}
+  .bar-row+.bar-row{border-top:1px solid var(--line)}
+  .bar-row .who{font-weight:600;font-size:.9rem}
+  .bar-row .who small{display:block;color:var(--faint);font-weight:400;font-size:.74rem;font-family:var(--mono)}
+  .track{height:12px;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+  .fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),color-mix(in srgb,var(--accent) 55%,var(--amber)));
+    width:var(--w,0);transition:width 1s cubic-bezier(.2,.7,.2,1)}
+  .fill.empty{background:repeating-linear-gradient(45deg,var(--crit-soft),var(--crit-soft) 6px,transparent 6px,transparent 12px);
+    border:1px dashed var(--crit)}
+  .bar-row .val{font-family:var(--mono);font-variant-numeric:tabular-nums;font-weight:660;font-size:.95rem}
+  .bar-row .val.zero{color:var(--crit)}
+
+  /* ---- table ---- */
+  .tbl-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+  table{border-collapse:collapse;width:100%;min-width:620px;background:var(--surface);font-size:.86rem}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--muted);font-weight:600;background:var(--surface-2);position:sticky;top:0}
+  tbody th{font-weight:600;color:var(--ink);white-space:nowrap}
+  td.nino{background:var(--accent-soft);color:var(--ink);font-weight:600}
+  thead th.nino{background:color-mix(in srgb,var(--accent) 20%,var(--surface-2));color:var(--accent-ink)}
+  tr:last-child td,tr:last-child th{border-bottom:none}
+  .mini{font-family:var(--mono);font-size:.78rem;font-variant-numeric:tabular-nums}
+  td .x{color:var(--crit);font-weight:700} td .v{color:var(--ok);font-weight:700}
+
+  /* ---- quotes ---- */
+  .quotes{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(255px,1fr))}
+  blockquote{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    padding:20px 22px;font-family:var(--serif);font-size:1.02rem;line-height:1.5;color:var(--ink);
+    position:relative;box-shadow:var(--shadow)}
+  blockquote::before{content:"\201C";font-family:var(--serif);position:absolute;top:2px;left:12px;
+    font-size:3rem;color:var(--accent);opacity:.3;line-height:1}
+  blockquote p{margin:0 0 .6rem;padding-top:.4rem}
+  blockquote cite{font-family:var(--mono);font-style:normal;font-size:.72rem;letter-spacing:.04em;
+    color:var(--faint);text-transform:uppercase}
+  .quote-note{margin-top:1.2rem;font-size:.92rem;color:var(--muted);border-left:3px solid var(--amber);
+    padding:.4rem 0 .4rem 1rem;background:linear-gradient(90deg,var(--amber-soft),transparent 70%)}
+  .quote-note b{color:var(--ink)}
+
+  /* ---- plan ---- */
+  .plan{display:grid;gap:0}
+  .phase{display:grid;grid-template-columns:auto 1fr;gap:20px;padding:20px 0;border-top:1px solid var(--line)}
+  .phase:first-child{border-top:none}
+  .phase .marker{display:flex;flex-direction:column;align-items:center;gap:6px}
+  .phase .dot{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-family:var(--mono);
+    font-weight:700;font-size:.92rem;color:var(--surface);background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+  .phase .rail{flex:1;width:2px;background:var(--line);min-height:12px}
+  .phase h3{font-size:1.04rem;font-weight:660;margin-bottom:.2rem}
+  .phase .when{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-ink);font-weight:600}
+  .phase ul{margin:.6rem 0 0;padding-left:1.1rem;color:var(--muted);font-size:.9rem;line-height:1.6}
+  .phase ul li{margin-bottom:.25rem}
+  .phase ul li b{color:var(--ink);font-weight:600}
+
+  /* ---- callout / footer ---- */
+  .callout{background:var(--accent);color:#fff;border-radius:16px;padding:clamp(22px,4vw,32px);
+    box-shadow:var(--shadow)}
+  :root[data-theme="dark"] .callout,@media (prefers-color-scheme:dark){.callout{color:#07130f}}
+  .callout .eyebrow{color:rgba(255,255,255,.8)}
+  .callout h2{font-size:clamp(1.3rem,3vw,1.7rem);margin:.4rem 0 .8rem;color:inherit;font-weight:700}
+  .callout p{color:rgba(255,255,255,.92);margin:0;max-width:56ch}
+  .callout .pts{margin-top:1.2rem;display:grid;gap:10px}
+  .callout .pt{display:flex;gap:.7rem;align-items:baseline;font-size:.96rem}
+  .callout .pt .num{font-family:var(--mono);font-weight:700;opacity:.7;font-size:.8rem}
+  footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);
+    font-size:.78rem;color:var(--faint);line-height:1.6}
+  footer .src{font-family:var(--mono);font-size:.72rem;word-break:break-word}
+
+  a{color:var(--accent-ink)}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+  @media (max-width:560px){
+    .row{grid-template-columns:1fr}
+    .bar-row{grid-template-columns:1fr auto}
+    .bar-row .track{grid-column:1/-1;order:3}
+    .phase{grid-template-columns:1fr}
+    .phase .marker{flex-direction:row}
+    .phase .rail{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){.fill{transition:none}}
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="kicker">
+      <span class="badge">Google Görünürlük Denetimi</span>
+      <span class="date">Temmuz 2026 · Ön Analiz</span>
+    </div>
+    <h1>Nino Anaokulu
+      <span class="sub">Eryaman · Etimesgut / Ankara için dijital görünürlük teşhisi</span>
+    </h1>
+    <p class="thesis">Nino, internette yalnızca <b>kendi adıyla</b> arandığında bulunuyor.
+      Bir velinin gerçekte yazdığı “eryaman anaokulu”, “eryaman kreş” aramalarında ise
+      görünmüyor. Sorun bütçe değil; <b>görünürlük altyapısının kurulmamış olması</b>.
+      Aşağıdaki bulguların tamamı yalnızca herkese açık verilerle, dışarıdan tespit edildi.</p>
+    <div class="byline">
+      <span><span class="k">Hazırlayan</span>[Adınız] · Dijital Pazarlama</span>
+      <span><span class="k">Kapsam</span>SEO · Google İşletme · İtibar · Rakip</span>
+      <span><span class="k">Yöntem</span>Halka açık arama & dizin verisi</span>
+    </div>
+  </header>
+
+  <section aria-label="Bir bakışta">
+    <div class="sec-head"><span class="n">01</span><h2>Bir bakışta</h2>
+      <span class="aside">Görüşmede canlı doğrulanabilir dört sayı</span></div>
+    <div class="cards">
+      <div class="card crit">
+        <div class="metric">3</div>
+        <div class="label">Google’da indeksli sayfa</div>
+        <div class="note">Menüdeki Hakkımızda & Galeri dahil çoğu sayfayı Google görmüyor.</div>
+      </div>
+      <div class="card crit">
+        <div class="metric">0<small> / 6</small></div>
+        <div class="label">Bölge aramasında ilk 10</div>
+        <div class="note">“eryaman anaokulu/kreş” vb. hiçbir aramada ilk sayfada değil.</div>
+      </div>
+      <div class="card warn">
+        <div class="metric">0</div>
+        <div class="label">Title’da lokasyon kelimesi</div>
+        <div class="note">Başlıklarda “Eryaman / Etimesgut / kreş” geçmiyor.</div>
+      </div>
+      <div class="card crit">
+        <div class="metric">154<small> ↔ ?</small></div>
+        <div class="label">Yorumda rakip farkı</div>
+        <div class="note">Rakip 154 yorum · 4,9★; Nino’nun görünür puanı yok.</div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-label="Bulgular">
+    <div class="sec-head"><span class="n">02</span><h2>Tespit ettiğim noktalar</h2>
+      <span class="aside">Önem sırasına göre</span></div>
+    <div class="find">
+
+      <div class="grp-label">Web sitesi & arama görünürlüğü</div>
+
+      <div class="row crit">
+        <span class="chip crit">Kritik</span>
+        <div class="body">
+          <h3>Google siteyi 3 sayfadan ibaret sanıyor</h3>
+          <p><code>site:ninoanaokulu.com</code> yalnızca ana sayfa, tek bir blog yazısı ve
+          iletişimi döndürüyor. <span class="cost">Bir anaokulu sitesinde beklenen 15–25 indeksli sayfanın
+          çoğu <b>Google’a hiç ulaşmamış</b>.</span></p>
+        </div>
+      </div>
+
+      <div class="row crit">
+        <span class="chip crit">Kritik</span>
+        <div class="body">
+          <h3>Sayfa başlıklarında tek bir semt/hizmet kelimesi yok</h3>
+          <p>Ana başlık: “Nino Anaokulu – Sevgiyle Büyüyen Minik Adımlar”. Veli “nino” değil
+          <b>“eryaman anaokulu”</b> yazıyor. <span class="cost">Google sayfayı bu aramayla
+          eşleştiremiyor; <b>marka dışı hiçbir trafik gelemez.</b></span></p>
+        </div>
+      </div>
+
+      <div class="row warn">
+        <span class="chip warn">Orta</span>
+        <div class="body">
+          <h3>İçerik üretimi tek yazıda durmuş</h3>
+          <p>“Eryaman’da Eğitimde Fark Yaratan Okul” yazısı doğru SEO niyetini gösteriyor —
+          biri başlamış ama sürdürmemiş. <span class="cost">Tek yazıyla sıralama alınmaz;
+          rakip onlarca sayfayla yarışıyor.</span></p>
+        </div>
+      </div>
+
+      <div class="grp-label">Google İşletme & haritalar (yerel SEO)</div>
+
+      <div class="row crit">
+        <span class="chip crit">Kritik</span>
+        <div class="body">
+          <h3>Çalışma saatleri kaynaktan kaynağa çelişkili</h3>
+          <p>Bir dizinde <span class="data">07:30–18:30</span>, diğerinde
+          <span class="data">08:00–17:00</span> yazıyor. <span class="cost">Google bu tutarsızlığı
+          <b>güvensizlik sinyali</b> olarak okur ve haritada sıralamayı düşürür.</span></p>
+        </div>
+      </div>
+
+      <div class="row warn">
+        <span class="chip warn">Orta</span>
+        <div class="body">
+          <h3>Yandex Haritalar’da “Nino” markası hiç geçmiyor</h3>
+          <p>Kayıt “Özel Nitelikli İlkeli Nesiller Anaokulu” adıyla. <span class="cost">Haritada
+          “nino” arayan veli okulu bulamıyor.</span></p>
+        </div>
+      </div>
+
+      <div class="row warn">
+        <span class="chip warn">Orta</span>
+        <div class="body">
+          <h3>Eski marka kirliliği: hâlâ “ABC Koleji Nino”</h3>
+          <p>Bazı dizinler 2013 birleşme dönemi bilgisiyle listeliyor.
+          <span class="cost">Çelişkili kayıtlar Google’ın işletme <b>kimliğinden emin olmasını</b> engelliyor.</span></p>
+        </div>
+      </div>
+
+      <div class="grp-label">Yorum & itibar</div>
+
+      <div class="row crit">
+        <span class="chip crit">Kritik</span>
+        <div class="body">
+          <h3>İnternette görünür bir Google puanı yok</h3>
+          <p>Hedefli aramalarda Nino için tek bir yıldız değeri bile çıkmıyor.
+          <span class="cost">Puanı görünmeyen işletme <b>harita paketinde de görünmez</b> —
+          “Google’dan etkileşim yok” şikâyetinin doğrudan sebebi.</span></p>
+        </div>
+      </div>
+
+      <div class="row opp">
+        <span class="chip opp">Fırsat</span>
+        <div class="body">
+          <h3>Elde güçlü övgüler var ama hiçbiri kullanılmıyor</h3>
+          <p>Veliler Meltem Hanım’ı adıyla övüyor, “3 günde uyum”, “diyetisyen onaylı doğal menü”
+          diyor. <span class="cost">Bu sosyal kanıt sitede, işletme profilinde ve sosyalde
+          <b>hiç değerlendirilmemiş</b>.</span></p>
+        </div>
+      </div>
+
+      <div class="grp-label">Sosyal medya</div>
+
+      <div class="row warn">
+        <span class="chip warn">Orta</span>
+        <div class="body">
+          <h3>Tek kanala sıkışmış, o kanal da aramada bulunmuyor</h3>
+          <p>Yalnızca Instagram var; profil adı “Nitelikli İlkeli Nesiller” olduğu için
+          “eryaman anaokulu” aramasında çıkmıyor. <span class="cost">Facebook ve YouTube
+          (okul turu videosu) <b>hiç yok</b> — rakiplerin hepsinde var.</span></p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section aria-label="Yorum karşılaştırması">
+    <div class="sec-head"><span class="n">03</span><h2>Görünür Google yorumu</h2>
+      <span class="aside">Aynı mahalle, aynı veli kitlesi</span></div>
+    <div class="bars">
+      <div class="bar-row">
+        <div class="who">Odtülüler Kids<small>Eryaman</small></div>
+        <div class="track"><div class="fill" style="--w:100%"></div></div>
+        <div class="val">154 · 4,9★</div>
+      </div>
+      <div class="bar-row">
+        <div class="who">Küçük Şeyler<small>Eryaman</small></div>
+        <div class="track"><div class="fill" style="--w:72%"></div></div>
+        <div class="val">aktif</div>
+      </div>
+      <div class="bar-row">
+        <div class="who">Nino Anaokulu<small>Eryaman</small></div>
+        <div class="track"><div class="fill empty" style="--w:100%"></div></div>
+        <div class="val zero">görünür puan yok</div>
+      </div>
+    </div>
+    <p class="quote-note"><b>Okur mantığı:</b> Veli, karar öncesi haritayı açıp yıldıza ve yorum
+    sayısına bakar. Yorumu görünmeyen okul, kısa listeye bile giremez. Bu, ilk 90 günde
+    <b>düzeltilebilir</b> tek en yüksek etkili kalem.</p>
+  </section>
+
+  <section aria-label="Rakip tablosu">
+    <div class="sec-head"><span class="n">04</span><h2>Rakip karşısında konum</h2>
+      <span class="aside">Eryaman’da 32 anaokulu (22 özel) arasında</span></div>
+    <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Ölçüt</th>
+            <th scope="col" class="nino">Nino</th>
+            <th scope="col">Odtülüler Kids</th>
+            <th scope="col">Küçük Dahiler</th>
+            <th scope="col">Küçük Şeyler</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Görünür Google yorumu</th>
+            <td class="nino"><span class="x">yok</span></td>
+            <td class="mini">154 · 4,9★</td>
+            <td class="mini">aktif</td>
+            <td class="mini">aktif</td>
+          </tr>
+          <tr>
+            <th scope="row">Arama için içerik / sayfa</th>
+            <td class="nino mini">3 indeksli</td>
+            <td>çok sayfa + widget</td>
+            <td>onlarca semt sayfası</td>
+            <td>kurumsal + mobil app</td>
+          </tr>
+          <tr>
+            <th scope="row">Domain sayısı</th>
+            <td class="nino mini">1</td>
+            <td class="mini">1</td>
+            <td class="mini">3+</td>
+            <td>kurumsal ağ</td>
+          </tr>
+          <tr>
+            <th scope="row">Sosyal kanal</th>
+            <td class="nino">yalnız Instagram</td>
+            <td>IG + Facebook</td>
+            <td>IG + Facebook</td>
+            <td>IG + FB + YouTube + app</td>
+          </tr>
+          <tr>
+            <th scope="row">İşletme profili durumu</th>
+            <td class="nino"><span class="x">optimize değil</span></td>
+            <td><span class="v">güçlü</span></td>
+            <td><span class="v">agresif</span></td>
+            <td><span class="v">kurumsal</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-label="Veli sesi">
+    <div class="sec-head"><span class="n">05</span><h2>Zaten elde olan güç</h2>
+      <span class="aside">Dizinlerdeki gerçek veli yorumlarından</span></div>
+    <div class="quotes">
+      <blockquote>
+        <p>Nino demek güven demek, Nino demek uzun bir yola huzurla çıkmak demek… okul kızıma
+        gerçekten harika şeyler kattı.</p>
+        <cite>— Veli yorumu</cite>
+      </blockquote>
+      <blockquote>
+        <p>Meltem Hanım çocuğu önceleyen bir eğitimci; öğretmenler her zaman ilgili ve güler yüzlü,
+        çocukla iletişimleri çok başarılı.</p>
+        <cite>— Veli yorumu</cite>
+      </blockquote>
+      <blockquote>
+        <p>Beklediğimizden çok daha kısa sürede, üç günde uyum sağladı. Diyetisyen onaylı, doğal
+        malzemeli menü bizim için fark yarattı.</p>
+        <cite>— Veli yorumu</cite>
+      </blockquote>
+    </div>
+    <p class="quote-note">Bu cümleler okulun <b>gerçek farkı</b> ve en güçlü satış argümanı —
+    ama şu an hiçbir pazarlama kanalında görünmüyor. İşimin ilk adımı, bu sesi
+    ana sayfaya, işletme profiline ve sosyale taşımak.</p>
+  </section>
+
+  <section aria-label="Plan">
+    <div class="sec-head"><span class="n">06</span><h2>90 günlük yol haritası</h2>
+      <span class="aside">Aylık sorumluluğun iskeleti</span></div>
+    <div class="plan">
+      <div class="phase">
+        <div class="marker"><div class="dot">1</div><div class="rail"></div></div>
+        <div>
+          <div class="when">Ay 1 · Temel — en yüksek etki, ~sıfır maliyet</div>
+          <h3>Görünürlüğü aç ve ölçmeye başla</h3>
+          <ul>
+            <li><b>Google İşletme Profili</b> devralınır: kategori, saat, foto, hizmet kartları, haftalık gönderi</li>
+            <li><b>NAP temizliği</b>: tüm dizinlerde tek isim, tek saat, tek telefon</li>
+            <li><b>Title/meta</b> yeniden yazılır (“Nino Anaokulu | Eryaman Kreş & Anaokulu”), temel sayfalar açılıp indekslettirilir</li>
+            <li><b>Yorum motoru</b>: memnun velilere çıkışta QR ile Google yorumu (hedef +30)</li>
+            <li>Search Console + GA4 + WhatsApp hattı + ön kayıt formu kurulur</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="marker"><div class="dot">2</div><div class="rail"></div></div>
+        <div>
+          <div class="when">Ay 2 · Kapsama</div>
+          <h3>Aranan her soruya bir sayfa</h3>
+          <ul>
+            <li><b>İçerik kümesi</b>: “Eryaman anaokulu fiyatları”, “kreş tavsiyesi”, yaş grubu & beslenme sayfaları</li>
+            <li>Yandex kaydı “Nino” markasıyla güncellenir; eksik dizinlere kayıt</li>
+            <li><b>Instagram</b> profili optimize edilir + <b>Facebook</b> sayfası açılır</li>
+            <li>Telefonla <b>okul turu videosu</b> → YouTube + profil + site</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="marker"><div class="dot">3</div></div>
+        <div>
+          <div class="when">Ay 3 · Büyüme & rapor</div>
+          <h3>Ücretli ivme ve şeffaf ölçüm</h3>
+          <ul>
+            <li><b>Google Ads</b>: “eryaman anaokulu/kreş” + yakın semtler, yarıçap hedefli — kayıt sezonundan önce devrede</li>
+            <li><b>Tek sayfalık aylık rapor</b>: arama görünümü, telefon/rota/yorum, form → <b>kayda dönüşen sayı</b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-label="Özet">
+    <div class="callout">
+      <div class="eyebrow">Görüşmede tek cümle</div>
+      <h2>“Sorununuz bütçe değil, görünürlük.”</h2>
+      <p>Nino’nun ürünü (Meltem Hanım’ın ilgisi, doğal menü, hızlı uyum) rakiplerden iyi;
+      eksik olan bu ürünü Google’da <b>bulunur ve kanıtlanır</b> hale getirmek. İlk aydan
+      itibaren ölçülebilir kılıyorum:</p>
+      <div class="pts">
+        <div class="pt"><span class="num">01</span><span>“Geçen ay Google’dan kaç veli aradı?” sorusuna <b>net bir sayı</b> ile cevap.</span></div>
+        <div class="pt"><span class="num">02</span><span>Bölge aramalarında ilk sayfaya <b>ilk 90 günde</b> giriş hedefi.</span></div>
+        <div class="pt"><span class="num">03</span><span>Yorum sayısında rakip farkını <b>görünür şekilde</b> kapatmak.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Bu ön analiz yalnızca herkese açık arama ve dizin verileriyle, dışarıdan hazırlanmıştır.
+    Site içi teknik denetim (hız, mobil, schema) ve İşletme Profili panel verileri, erişim
+    alındıktan sonraki ilk hafta raporuna eklenir. Sayısal iddialar görüşmede canlı olarak
+    birlikte doğrulanabilir.</p>
+    <p class="src">Kaynaklar: ninoanaokulu.com · okul.com.tr · tikla.com.tr · bebedu.com ·
+    yandex.com.tr/maps · instagram.com/ninoanaokulu · odtululerkidseryaman.com ·
+    kucukdahiler.com(.tr) · kadinlarkulubu.com · okul.com.tr/anaokulu/ankara-etimesgut-eryaman</p>
+  </footer>
+
+</div>
+<script>
+  // Bars animate in on first view (respects reduced-motion via CSS transition guard)
+  (function(){
+    var fills=document.querySelectorAll('.fill');
+    fills.forEach(function(f){var w=f.style.getPropertyValue('--w');f.style.setProperty('--w','0');
+      requestAnimationFrame(function(){requestAnimationFrame(function(){f.style.setProperty('--w',w);});});});
+  })();
+</script>
