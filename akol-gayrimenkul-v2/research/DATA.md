@@ -1,6 +1,14 @@
 # AKOL EMLAK GAYRİMENKUL — Doğrulanmış Veri Dosyası
 Toplama tarihi: 16 Temmuz 2026. Tüm bilgiler kamuya açık kaynaklardan alındı; kaynak her satırda belirtildi.
 
+> **Kullanıcı düzeltmeleri (sitede uygulanır, aşağıdaki ham veriden önce gelir):**
+> - Ana numara her yerde **0546 420 76 78**. 0553 144 08 61 yalnızca ikincil ("Telefon 2").
+> - Instagram olarak yalnızca **@akolemlak** kullanılır; @akolemlakyenikent ve onun takipçi sayısı sitede yer almaz.
+> - Aşağıdaki "Gerçek İlan Başlıkları" listesi tarihsel kayıttır: o ilanlar yayından kalktı. Sitede ilan kartı,
+>   ilan numarası ya da ilan-detay linki kullanılmaz; ilanlar için yalnızca mağaza kökü: akolemlak06.sahibinden.com
+> - Ekim 2026 (v2): sahibinden.com, Google Maps, Instagram ve Facebook bu bulut ortamından erişilemedi;
+>   veriler yeniden doğrulanamadı. Puan/yorum sayısı Temmuz verisidir.
+
 ## Kimlik
 - Resmi/Google adı: **AKOL EMLAK GAYRİMENKUL** (Google Maps)
 - Marka: AKOL EMLAK; sahibi/kurucu: **Ferhat Karaman** (IG @akolemlak profil adı + ofis cephesindeki "Ferhat KARAMAN" tabelası)
