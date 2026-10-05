@@ -786,7 +786,7 @@ html:not(.js) .led__static { display: flex; }
 .listings { position: relative; overflow: hidden; }
 .listings__grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   gap: clamp(32px, 6vw, 96px);
   align-items: center;
 }
@@ -834,9 +834,9 @@ html:not(.js) .led__static { display: flex; }
   padding-top: 18px;
   border-top: 1px solid var(--line-dark);
   font-family: var(--f-display);
-  font-stretch: 118%;
+  font-stretch: 110%;
   font-weight: 800;
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
   line-height: 1.05;
 }
 .store__cta .ico { width: 1em; height: 1em; transition: transform .5s var(--ease-out); }
